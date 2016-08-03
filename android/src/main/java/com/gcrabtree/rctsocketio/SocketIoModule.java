@@ -68,7 +68,7 @@ public class SocketIoModule extends ReactContextBaseJavaModule {
     public void emit(String event, ReadableMap items) {
         HashMap<String, Object> map = SocketIoReadableNativeMap.toHashMap((ReadableNativeMap) items);
         if (mSocket != null) {
-            mSocket.emit(event, new JSONObject(map));
+            mSocket.emit(event, SocketIoJSONUtil.hashMap2JSONObject(map));
         }
         else {
             Log.e(TAG, "Cannot execute emit. mSocket is null. Initialize socket first!!!");
