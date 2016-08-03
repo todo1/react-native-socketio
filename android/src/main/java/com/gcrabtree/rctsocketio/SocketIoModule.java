@@ -16,7 +16,7 @@ import com.facebook.react.bridge.ReadableNativeMap;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 
-import org.json.JSONObject;
+import org.json.JSONException;
 
 import java.net.URISyntaxException;
 import java.util.HashMap;
@@ -65,7 +65,7 @@ public class SocketIoModule extends ReactContextBaseJavaModule {
      * @param items The data to pass through the SocketIo engine to the server endpoint.
      */
     @ReactMethod
-    public void emit(String event, ReadableMap items) {
+    public void emit(String event, ReadableMap items) throws JSONException {
         HashMap<String, Object> map = SocketIoReadableNativeMap.toHashMap((ReadableNativeMap) items);
         if (mSocket != null) {
             mSocket.emit(event, SocketIoJSONUtil.hashMap2JSONObject(map));
